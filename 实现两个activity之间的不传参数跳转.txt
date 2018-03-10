@@ -1,0 +1,80 @@
+
+   所需文件: 两个不同的 ***.xml文件和两个不同的 ***.java文件（***.java文件所继承的父类均是AppCompatActivity.java(即Java自带的系统包中的Java文件))。
+
+1、在第一个***.xml文件中Button标签中引用（android:id="@+id/……"）属性，同样，在第二个***.xml文件也引用该ID属性。这里方便说明将第一个Button的ID命名为：button_next，第二个Button的ID命名为：button_back;将第一个 ***.java文件命名为：Apple.java，第二个 ***.java文件命名为：Pear.java；再将第一个 ***.xml文件命名为：fruit_apple.xml，第二个 ***.xml文件命名为：fruit_pear.xml.
+
+2.在 Apple.java 文件中写入以下代码：
+=================================================================
+
+public class Apple extends AppCompatActivity{
+private Button next;
+	@Override
+	protected void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.fruit_apple);
+		next=(Button)findViewById(R.id.button_next);
+		next.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View v){
+				Intent intent=new Intent(Apple.this,Pear.class);
+				startActivity(intent);
+						}
+							});
+
+						}
+					}
+
+=================================================================
+
+接着在fruit_apple.xml的Button标签中添加
+
+<Button
+	android:id="@+id/button_next"
+	……
+/>
+
+3、在Pear.java中写入以下代码:
+=================================================================
+
+public class Pear extends AppCompatActivity{
+private Button back;
+	@Override
+	protected void onCreate(Bundle savedInstanceState){
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.fruit_pear);
+	back=(Button)findViewById(R.id.button_back);
+	back.setOnClickListener(new View.OnClickListener(){
+		@Override
+		public void onClick(View v){
+			Intent intent=new Intent(Pear.this,Apple.class);
+			startActivity(intent);
+}
+});
+}
+}
+
+=================================================================
+
+再接着在fruit_pear.xml的Button标签中添加
+
+<Button
+	android:id="@+id/button_back"
+	……
+/>
+
+4、在AndroidMainfest.xml文件中添加以下代码:
+
+=================================================================
+
+<activity android:name=".Apple"><!--Apple.java文件所需内容-->
+	<intent-filter>
+		<action android:name="android.intent.action.MAIN"/>
+		<category android:name="android.intent.category.LAUNCHER"/>
+	</intent-filter>
+</activity>
+<activity android:name=".Pear"><!--Pear.java文件所需内容-->
+
+</activity>
+
+=================================================================
+5.运行测试情况.
