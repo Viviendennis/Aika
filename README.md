@@ -1,2 +1,2 @@
-# Aika
-Personal sharing his story!:)
+# ParallelCraft_MyPerson
+Welcome to ParallelCraft! :)
